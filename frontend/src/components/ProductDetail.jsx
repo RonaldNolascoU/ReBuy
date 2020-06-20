@@ -1,44 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import Breadcrumb from './Breadcrumb';
+import { Grid, Card, Image, Button } from 'semantic-ui-react';
+import Breadcrumbs from './Breadcrumbs';
 import axios from 'axios';
 const ProductDetail = (props) => {
-    console.log(props.match.params.id);
     const [products, setProduct] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const {data} = await axios.get('http://localhost:5000/api/product/' + props.match.params.id);
+            const { data } = await axios.get('http://localhost:5000/api/product/' + props.match.params.id);
             setProduct(data);
-             console.log(data, 'data')
+            console.log(data, 'data')
         }
         fetchData();
         return () => {
             //
         };
     }, []);
-        return ( 
-        
+    return (
+
         <React.Fragment>
-        <Breadcrumb product={products.name}/>
-            
-            <div className="container">
-                <div className="row">
-                    <div className="col-4">
-                        <img  src={products.image} alt=""/>
-                    </div>
-                    <div className="col-4">
-                        <h2>{products.name}</h2>
-                        <h3 className="badge badge-primary">${products.price}</h3>
-                    </div>
-                    <div className="col-4">
-                        
-                    </div>
-                </div>
-            </div>
-            
-            </React.Fragment>
-            
-            );
+            <Breadcrumbs product={products.name} />
+                    <Card.Group centered className="card-group">
+                        <Card>
+                            <Image src={products.image} wrapped ui={false} />
+                            <Card.Content>
+                                <Card.Header className="product-name">{products.name}</Card.Header>
+                                <Card.Meta>
+                                    <span className='date'>{products.brand}</span>
+                                </Card.Meta>
+                                <Card.Description>
+                                    {products.description}
+                                </Card.Description>
+                            </Card.Content>
+                            <Card.Content extra>
+                                <Button animated='fade'>
+                                    <Button.Content visible>Buy</Button.Content>
+                                    <Button.Content hidden>${products.price}</Button.Content>
+                                </Button>
+                            </Card.Content>
+                        </Card>
+                    </Card.Group>
+        </React.Fragment>
+
+    );
 }
- 
+
 export default ProductDetail;

@@ -157,3 +157,22 @@ a:hover{
   transform: translateX(-110%);
   transition: all var(--speed) ease;
 }
+
+.img {
+  width: 270.12px;
+  height: 270.12px;
+}
+
+.product-name {
+  background-color: white;
+}
+
+.card-group {
+  margin: 0 !important;
+  margin-bottom: 13rem !important;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+}

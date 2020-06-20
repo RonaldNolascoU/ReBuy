@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Product from './Product';
 import axios from 'axios';
+import { Grid } from 'semantic-ui-react';
 const ProductList = () =>  {
     const [products, setProduct] = useState([]);
 
@@ -17,7 +18,9 @@ const ProductList = () =>  {
 
     const renderProducts = () => {
         return (products.map(product =>
-            <Product key={product.id} product={product} />
+            <Grid.Row key={product.id}>
+                <Product product={product} />
+            </Grid.Row>
         )
         )
     }
